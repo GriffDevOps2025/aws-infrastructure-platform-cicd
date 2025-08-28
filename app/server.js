@@ -1,7 +1,6 @@
 const express = require('express');
 const mysql = require('mysql2/promise');
 const cors = require('cors');
-
 const app = express();
 const PORT = process.env.PORT || 80;
 
@@ -35,7 +34,6 @@ app.get('/api/health', async (req, res) => {
     const connection = await mysql.createConnection(dbConfig);
     await connection.ping();
     await connection.end();
-    
     res.status(200).json({
       status: 'healthy',
       database: 'connected',
@@ -51,8 +49,13 @@ app.get('/api/health', async (req, res) => {
   }
 });
 
-// Start server
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-});
+// Export app for testing
+module.exports = app;
+
+// Start server only if this file is run directly
+if (require.main === module) {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  });
+}
