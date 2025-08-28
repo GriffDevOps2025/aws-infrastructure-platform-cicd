@@ -1,0 +1,43 @@
+﻿name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'app/**'
+      - '.github/workflows/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'app/**'
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: aws-infra-platform
+  ECS_SERVICE: aws-infra-platform-service
+  ECS_CLUSTER: aws-infra-platform-cluster
+  CONTAINER_NAME: aws-infra-platform
+
+jobs:
+  test:
+    name: Test Application
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: app/package-lock.json
+    
+    - name: Install dependencies
+      working-directory: ./app
+      run: npm ci
+    
+    - name: Run tests
+      working-directory: ./app
+      run: npm test
