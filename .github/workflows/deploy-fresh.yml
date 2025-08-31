@@ -72,11 +72,21 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "New image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
     
-    - name: Update ECS service
+    - name: Deploy to ECS
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        IMAGE_TAG: ${{ github.sha }}
       run: |
         aws ecs update-service \
           --cluster $ECS_CLUSTER \
           --service $ECS_SERVICE \
           --force-new-deployment \
           --region $AWS_REGION
-        echo "ECS service deployment initiated"
+        
+        echo "Waiting for deployment to complete..."
+        aws ecs wait services-stable \
+          --cluster $ECS_CLUSTER \
+          --services $ECS_SERVICE \
+          --region $AWS_REGION
+        
+        echo "ECS deployment completed successfully"
