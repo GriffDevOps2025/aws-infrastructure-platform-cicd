@@ -14,7 +14,7 @@ on:
 env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: aws-infra-platform
-  ECS_SERVICE: aws-infra-platform-service
+  ECS_SERVICE: web-app
   ECS_CLUSTER: aws-infra-platform-cluster
   CONTAINER_NAME: aws-infra-platform
 
