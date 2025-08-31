@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1756422125889" clover="3.2.0">
-  <project timestamp="1756422125889" name="All files">
+<coverage generated="1756642180003" clover="3.2.0">
+  <project timestamp="1756642180003" name="All files">
     <metrics statements="23" coveredstatements="17" conditionals="16" coveredconditionals="13" methods="3" coveredmethods="2" elements="42" coveredelements="32" complexity="0" loc="23" ncloc="23" packages="1" files="1" classes="1"/>
     <file name="server.js" path="C:\Users\griff\OneDrive\Documents\aws-infrastructure-cicd\app\server.js">
       <metrics statements="23" coveredstatements="17" conditionals="16" coveredconditionals="13" methods="3" coveredmethods="2"/>
