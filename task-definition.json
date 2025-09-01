@@ -9,13 +9,18 @@
     {
       "name": "aws-infra-platform-container",
       "image": "PLACEHOLDER",
+      "cpu": 0,
       "portMappings": [
         {
           "containerPort": 80,
+          "hostPort": 80,
           "protocol": "tcp"
         }
       ],
       "essential": true,
+      "environment": [],
+      "mountPoints": [],
+      "volumesFrom": [],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
@@ -23,7 +28,10 @@
           "awslogs-region": "us-east-1",
           "awslogs-stream-prefix": "ecs"
         }
-      }
+      },
+      "systemControls": []
     }
-  ]
+  ],
+  "volumes": [],
+  "placementConstraints": []
 }
